@@ -145,12 +145,19 @@ public class GUIApplication {
 
     private static String getGroupDataText(Map<Integer, java.util.List<Double>> groupData) {
         StringBuilder builder = new StringBuilder();
-        for(int i = 0; i< groupData.size(); i++){
+        for(int i = 0; i < groupData.size(); i++){
+            double sum = 0;
             java.util.List<Double> dataList = groupData.get(i);
             builder.append("Group Data " + i + ":\n");
             for(Double num: dataList){
+                sum += num;
                 builder.append(num + " ");
             }
+            dataList.sort(Comparator.naturalOrder());
+            builder.append("\n");
+            builder.append("Highest in group: " + dataList.get(dataList.size() - 1) + "\n");
+            builder.append("Lowest in gorup: " + dataList.get(0) + "\ng");
+            builder.append("Average in group: " + sum / dataList.size() + "\n");
             builder.append("\n");
         }
         return builder.toString();
